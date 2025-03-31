@@ -8,7 +8,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 
 // Load shared environment variables first
-dotenv.config({ path: path.join(__dirname, '../../shared/.env') });
+dotenv.config({ path: path.join(__dirname, 'shared/.env') });
 // Load service-specific environment variables
 dotenv.config();
 
@@ -23,16 +23,16 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-// const kafkaClient = new KafkaClient({ kafkaHost: process.env.KAFKA_BROKER });
-// const producer = new Producer(kafkaClient);
+const kafkaClient = new KafkaClient({ kafkaHost: process.env.KAFKA_BROKER });
+const producer = new Producer(kafkaClient);
 
-// producer.on('ready', () => {
-//   console.log('Kafka Producer is connected and ready.');
-// });
+producer.on('ready', () => {
+  console.log('Kafka Producer is connected and ready.');
+});
 
-// producer.on('error', (err) => {
-//   console.error('Kafka Producer error:', err);
-// });
+producer.on('error', (err) => {
+  console.error('Kafka Producer error:', err);
+});
 
 io.on('connection', (socket) => {
   console.log('a user connected');

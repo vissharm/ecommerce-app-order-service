@@ -2,7 +2,7 @@ const express = require('express');
 const Order = require('../models/Order');
 const router = express.Router();
 const kafka = require('kafka-node');
-const auth = require('../../../shared/middleware/auth');
+const auth = require('shared/middleware/auth');
 
 // Kafka configuration
 const client = new kafka.KafkaClient({kafkaHost: process.env.KAFKA_BROKER});

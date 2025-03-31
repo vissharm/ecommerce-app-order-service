@@ -6,6 +6,7 @@
     "start": "node src/server.js"
   },
   "dependencies": {
+    "shared": "file:../shared",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^9.0.2",
