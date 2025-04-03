@@ -19,6 +19,15 @@ const io = new Server(server);
 app.use(express.json());
 app.use('/api/orders', orderRoutes);
 
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'order-service',
+    version: process.env.npm_package_version || '1.0.0',
+    timestamp: new Date().toISOString()
+  });
+});
+
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
